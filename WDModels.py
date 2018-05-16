@@ -144,12 +144,12 @@ while test != 'y':
             #     path3 = LineString(cont.collections[0].get_paths()[0].vertices)
     except:
         print "Outside the range of the Bergeron Models"
-    # Tfinal = []
-    # LGfinal = []
-    # for p in path1.intersection(path2):
-    #     Tfinal.append(p.x)
-    #     LGfinal.append(p.y)
-    Tfinal, LGfinal = path1.intersection(path2).x, path1.intersection(path2).y
+    Tfinal = []
+    LGfinal = []
+    for p in path1.intersection(path2):
+        Tfinal.append(p.x)
+        LGfinal.append(p.y)
+    # Tfinal, LGfinal = path1.intersection(path2).x, path1.intersection(path2).y
     print Tfinal, LGfinal
 
     # plt.figure()
