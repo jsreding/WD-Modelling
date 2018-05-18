@@ -79,38 +79,38 @@ lgr = np.linspace(7.0, 9.5, 1000)
 #     plt.clabel(plt.contour(tr, lgr, surfs[s], np.linspace(-1, 2, 100)))
 #     plt.show()
 
-# trange = np.linspace(1500, 120000, 1000)
-# lgrange = np.arange(7.0, 9.6, 0.5)
-# plt.figure()
-# # ax = plt.axes(projection='3d')
-# plt.title("$T_{eff}$, $\log g$ surface in $u-g$, $g-r$ parameter space", fontsize=18)
-# plt.ylabel("$u-g$", fontsize=14)
-# plt.xlabel("$g-r$", fontsize=14)
-# for l in lgrange:
-#     ugr = []
-#     grr = []
-#     rir = []
-#     for t in trange:
-#         ugr.append(colorfit(t, l)[0])
-#         grr.append(colorfit(t, l)[1])
-#         rir.append(colorfit(t, l)[2])
-#     plt.plot(grr, ugr, label='$\log g = %s$'%(l))
-# tcoarse = np.arange(1500, 120100, 500)
-# for t in tcoarse:
-#     ugr = []
-#     grr = []
-#     for l in lgrange:
-#         ugr.append(colorfit(t, l)[0])
-#         grr.append(colorfit(t, l)[1])
-#         rir.append(colorfit(t, l)[2])
-#     if t%5000. == 0:
-#         plt.annotate('$%s K$'%(t), xy=(grr[-1],ugr[-1]), xycoords='data', fontsize=14)
-#     plt.plot(grr, ugr, color='black')
-# plt.legend()
+trange = np.linspace(1500, 120000, 1000)
+lgrange = np.arange(7.0, 9.6, 0.5)
+plt.figure()
+# ax = plt.axes(projection='3d')
+plt.title("$T_{eff}$, $\log g$ surface in $u-g$, $g-r$ parameter space", fontsize=18)
+plt.ylabel("$u-g$", fontsize=14)
+plt.xlabel("$g-r$", fontsize=14)
+for l in lgrange:
+    ugr = []
+    grr = []
+    rir = []
+    for t in trange:
+        ugr.append(colorfit(t, l)[0])
+        grr.append(colorfit(t, l)[1])
+        rir.append(colorfit(t, l)[2])
+    plt.plot(grr, ugr, label='$\log g = %s$'%(l))
+tcoarse = np.arange(1500, 120100, 500)
+for t in tcoarse:
+    ugr = []
+    grr = []
+    for l in lgrange:
+        ugr.append(colorfit(t, l)[0])
+        grr.append(colorfit(t, l)[1])
+        rir.append(colorfit(t, l)[2])
+    if t%5000. == 0:
+        plt.annotate('$%s K$'%(t), xy=(grr[-1],ugr[-1]), xycoords='data', fontsize=14)
+    plt.plot(grr, ugr, color='black')
+plt.legend()
 # plt.xlim(-0.6, 0.35)
 # plt.ylim(-0.6, 1.0)
-# plt.gca().invert_yaxis()
-# plt.show()
+plt.gca().invert_yaxis()
+plt.show()
 
 tr = np.linspace(1500, 120000, 1000)
 lgr = np.linspace(7.0, 9.5, 1000)
@@ -144,12 +144,12 @@ while test != 'y':
             #     path3 = LineString(cont.collections[0].get_paths()[0].vertices)
     except:
         print "Outside the range of the Bergeron Models"
-    Tfinal = []
-    LGfinal = []
-    for p in path1.intersection(path2):
-        Tfinal.append(p.x)
-        LGfinal.append(p.y)
-    # Tfinal, LGfinal = path1.intersection(path2).x, path1.intersection(path2).y
+    # Tfinal = []
+    # LGfinal = []
+    # for p in path1.intersection(path2):
+    #     Tfinal.append(p.x)
+    #     LGfinal.append(p.y)
+    Tfinal, LGfinal = path1.intersection(path2).x, path1.intersection(path2).y
     print Tfinal, LGfinal
 
     # plt.figure()
