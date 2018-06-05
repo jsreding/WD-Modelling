@@ -4,6 +4,7 @@ import sys
 from scipy import interpolate as interp
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+from shapely.geometry import LineString
 import time
 
 def find_nearest(array,value):
@@ -108,7 +109,7 @@ trange = np.linspace(1500, 120000, 1000)
 lgrange = np.arange(7.0, 9.6, 0.5)
 plt.figure()
 # # ax = plt.axes(projection='3d')
-plt.title("$T_{eff}$, $\log g$ surface in $u-g$, $g-r$ parameter space", fontsize=18)
+plt.title("K2 white dwarfs and $T_{eff}$, $\log g$ surface in $u-g$, $g-r$ parameter space", fontsize=18)
 plt.ylabel("$u-g$", fontsize=14)
 plt.xlabel("$g-r$", fontsize=14)
 for l in lgrange:
@@ -128,12 +129,37 @@ for t in tcoarse:
         ugr.append(colorfit(t, l)[0])
         grr.append(colorfit(t, l)[1])
         rir.append(colorfit(t, l)[2])
-    # if t%1000. == 0:
-        # plt.annotate('$%s K$'%(t), xy=(grr[-1],ugr[-1]), xycoords='data', fontsize=14)
+    if t%5000. == 0:
+        plt.annotate('$%s K$'%(t), xy=(grr[-1],ugr[-1]), xycoords='data', fontsize=14)
     plt.plot(grr, ugr, color='black', zorder=1)
-magug = [-0.076, 0.258, 0.463, 0.449, 0.122, 0.243, 0.166, 0.456, -0.047, 0.479, 0.520, 0.484, 0.428, 0.438, 0.424, 0.494, 0.440, 0.391, 0.378, 0.488, -0.326, -0.432, -0.340, 0.401, -0.376, 0.289, 2.548, 0.395, 0.215, -0.412, -0.386, 0.406, -0.119, -0.416, -0.272, -0.253, -0.145, -0.140, -0.045, 0.465, 0.018, -0.476, -0.458, 2.539, 0.360, -0.073, 0.005, 0.532, -0.367, 0.578, 0.077, 0.494, 0.533, 0.640, 0.371, -0.302, -0.192, 0.435]
-maggr = [-0.434, -0.313, -0.181, 0.054, -0.290, -0.279, -0.349, -0.047, -0.348, 0.137, 0.070, 0.095, 0.063, 0.037, 0.019, 0.100, 0.046, -0.038, -0.207, -0.242, -0.374, -0.545, -0.509, 0.028, -0.440, -0.268, 1.082, -0.070, -0.282, -0.462, -0.524, -0.085, -0.316, -0.472, -0.427, -0.326, -0.419, -0.335, -0.314, 0.109, -0.222, -0.554, -0.555, 0.585, -0.321, -0.395, -0.223, -0.177, -0.507, -0.134, -0.165, 0.097, 0.053, 0.286, 0.065, -0.452, -0.463, -0.010]
-plt.scatter(maggr, magug, zorder=2)
+unug = np.load('unug.npy')
+ungr = np.load('ungr.npy')
+unug_da = np.load('unug.npy')[:842]
+ungr_da = np.load('ungr.npy')[:842]
+unug_db = np.load('unug.npy')[842:925]
+ungr_db = np.load('ungr.npy')[842:925]
+unug_dc = np.load('unug.npy')[925:973]
+ungr_dc = np.load('ungr.npy')[925:973]
+unug_other = np.load('unug.npy')[973:]
+ungr_other = np.load('ungr.npy')[973:]
+spug = np.load('spug.npy')
+spgr = np.load('spgr.npy')
+spug_da = np.load('spug.npy')[:36]
+spgr_da = np.load('spgr.npy')[:36]
+spug_db = np.load('spug.npy')[36:39]
+spgr_db = np.load('spgr.npy')[36:39]
+spug_dc = np.load('spug.npy')[39:41]
+spgr_dc = np.load('spgr.npy')[39:41]
+spug_other = np.load('spug.npy')[41:]
+spgr_other = np.load('spgr.npy')[41:]
+plt.scatter(ungr_da, unug_da, label='Unspotted DA', s=20, alpha=.5, zorder=2)
+plt.scatter(ungr_db, unug_db, label='Unspotted DB', s=20, color='Green', alpha=.5, zorder=2)
+plt.scatter(ungr_dc, unug_dc, label='Unspotted DC', s=20, color='Purple', alpha=.5, zorder=2)
+plt.scatter(ungr_other, unug_other, label='Unspotted DC', s=20, color='Grey', alpha=.5, zorder=2)
+plt.scatter(spgr_da, spug_da, label='Spotted DA', marker='*', s=100, color='Red', edgecolors='Black', zorder=3)
+plt.scatter(spgr_db, spug_db, label='Spotted DB', marker='*', s=100, color='Orange', edgecolors='Black', zorder=3)
+plt.scatter(spgr_dc, spug_dc, label='Spotted DC', marker='*', s=100, color='Yellow', edgecolors='Black', zorder=3)
+plt.scatter(spgr_other, spug_other, label='Spotted Other/Unknown', marker='*', s=100, color='White', edgecolors='Black', zorder=3)
 plt.legend()
 plt.xlim(-0.6, 0.35)
 plt.ylim(-0.6, 1.0)
@@ -144,42 +170,64 @@ tr = np.linspace(1500, 120000, 1000)
 lgr = np.linspace(7.0, 9.5, 1000)
 UG = np.load("ugsurf.npy")
 GR = np.load("grsurf.npy")
-RI = np.load("risurf.npy")
-test = 'n'
-while test != 'y':
-    # t1 = input("u-g = ")
-    t1 = input("g-r = ")
-    t2 = input("r-i = ")
-    # t3 = input("r-i = ")
-    inp = [t1, t2]
-    col = [GR, RI]
-    # inp = [t1, t2, t3]
-    # col = [UG, GR, RI]
-    from shapely.geometry import LineString
-    try:
-        for c in range(len(col)):
-            cont = plt.contour(tr, lgr, col[c], [inp[c]]);
-            if c == 0:
-                ugt = [p[0] for p in cont.collections[0].get_paths()[0].vertices]
-                uglg = [p[1] for p in cont.collections[0].get_paths()[0].vertices]
-                path1 = LineString(cont.collections[0].get_paths()[0].vertices)
-            elif c == 1:
-                grt = [p[0] for p in cont.collections[0].get_paths()[0].vertices]
-                grlg = [p[1] for p in cont.collections[0].get_paths()[0].vertices]
-                path2 = LineString(cont.collections[0].get_paths()[0].vertices)
-            # elif c == 2:
-            #     rit = [p[0] for p in cont.collections[0].get_paths()[0].vertices]
-            #     rilg = [p[1] for p in cont.collections[0].get_paths()[0].vertices]
-            #     path3 = LineString(cont.collections[0].get_paths()[0].vertices)
-    except:
-        print("Outside the range of the Bergeron Models")
+# RI = np.load("risurf.npy")
+
+# un_temps = []
+# # test = 'n'
+# # while test != 'y':
+# #     t1 = input("u-g = ")
+# #     t2 = input("g-r = ")
+# #     # t3 = input("r-i = ")
+# #     inp = [t1, t2]
+# for u in range(len(unug)):
+#     inp = [unug[u], ungr[u]]
+#     col = [UG, GR]
+#     try:
+#         for c in range(len(col)):
+#             cont = plt.contour(tr, lgr, col[c], [inp[c]])
+#             if c == 0:
+#                 ugt = [p[0] for p in cont.collections[0].get_paths()[0].vertices]
+#                 uglg = [p[1] for p in cont.collections[0].get_paths()[0].vertices]
+#                 path1 = LineString(cont.collections[0].get_paths()[0].vertices)
+#             elif c == 1:
+#                 grt = [p[0] for p in cont.collections[0].get_paths()[0].vertices]
+#                 grlg = [p[1] for p in cont.collections[0].get_paths()[0].vertices]
+#                 path2 = LineString(cont.collections[0].get_paths()[0].vertices)
+#             # elif c == 2:
+#             #     rit = [p[0] for p in cont.collections[0].get_paths()[0].vertices]
+#             #     rilg = [p[1] for p in cont.collections[0].get_paths()[0].vertices]
+#             #     path3 = LineString(cont.collections[0].get_paths()[0].vertices)
+#         Tfinal, LGfinal = path1.intersection(path2).x, path1.intersection(path2).y
+#         un_temps.append(Tfinal)
+#     except:
+#         print("Outside the range of the Bergeron Models")
+#
+# np.save("un_temps", un_temps)
+
+un_temps = np.load("un_temps.npy")
+sp_temps = np.load("sp_temps.npy")
+
+fig  = plt.figure()
+ax1 = fig.add_subplot(211)
+ax1.minorticks_on()
+ax1.set_title("K2 white dwarf density by 1000K Temperature Bin")
+ax1.set_ylabel("Density (# of stars)")
+ax1.set_xlabel("Temperature (K)")
+ax1.hist(un_temps, bins=119, label='Unspotted')
+plt.legend()
+ax2 = fig.add_subplot(212)
+ax2.minorticks_on()
+ax2.set_ylabel("Density (# of stars)")
+ax2.set_xlabel("Temperature (K)")
+ax2.hist(sp_temps, bins=119, color='Orange', label='Spotted')
+plt.legend()
+plt.show()
+
     # Tfinal = []
     # LGfinal = []
     # for p in path1.intersection(path2):
     #     Tfinal.append(p.x)
     #     LGfinal.append(p.y)
-    Tfinal, LGfinal = path1.intersection(path2).x, path1.intersection(path2).y
-    print(Tfinal, LGfinal)
 
     # plt.figure()
     # plt.title("Color Contour Intersections", fontsize=20)
@@ -191,7 +239,7 @@ while test != 'y':
     # plt.scatter(Tfinal, LGfinal, label='$T_{eff}=%s, \log g=%s$'%(Tfinal, LGfinal))
     # plt.legend(fontsize=14)
     # plt.show()
-    test = input("Done? ")
+    # test = input("Done? ")
 
 # dahteff = [14078., 15254., 17326., 20335., 11140., 16750., 11351., 22775., 19134., 17904., 17936., 22490., 25636., 8753., 6886., 16175., 18764., 18529., 15613., 15980., 10604., 18090., 22510., 12284., 10182., 19142., 18694., 9871., 7525., 20160., 13458., 12275., 14592., 16700., 28315., 47547., 66229., 28125., 21696., 59983., 61801., 10620.]
 # dahlogg = [8.45, 9.02, 9.02, 9.0, 8.738, 9.12, 8.33, 9.05, 7.81, 7.79, 8.21, 8.69, 7.44, 9.06, 9.0, 8.37, 9.16, 8.09, 8.15, 8.16, 7.97, 7.91, 10.0, 8.4, 6.84, 7.86, 8.07, 8.04, 9.02, 9.0, 9.0, 9.0, 5.65, 8.32, 10.0, 8.84, 7.58, 9.22, 8.08, 8.0, 6.799, 9.189]
