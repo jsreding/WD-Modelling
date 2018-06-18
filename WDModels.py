@@ -34,6 +34,7 @@ K = []
 age = []
 with open(sys.argv[1], 'r') as f:
     reader = csv.DictReader(f, delimiter=' ')
+    # reader = csv.DictReader(f, delimiter='\t')
     for row in reader:
         teff.append(float(row['Teff']))
         M.append(float(row['M/Mo']))
@@ -53,7 +54,7 @@ with open(sys.argv[1], 'r') as f:
         J.append(float(row['J'])-0.0140)
         H.append(float(row['H'])+0.0060)
         K.append(float(row['K'])+0.0080)
-        age.append(float(row['Age']))
+        # age.append(float(row['Age']))
 ug = np.asarray(u)-np.asarray(g)
 gr = np.asarray(g)-np.asarray(r)
 ri = np.asarray(r)-np.asarray(i)
@@ -69,126 +70,157 @@ HK = np.asarray(H)-np.asarray(K)
 def colorfit(teff_in, logg_in):
     teffi = teff[:58]
     loggi = np.arange(7.0, 9.6, 0.5)
-    color = [ug, gr, ri]
+    color = [ug, gr, M]
     intdata = []
     for data in color:
         datai = np.array([data[:58], data[58:116], data[116:174], data[174:232], data[232:290], data[290:348]])
-        bvspl_teff = interp.RectBivariateSpline(loggi, teffi, datai, kx=1, ky=1)
+        bvspl_teff = interp.RectBivariateSpline(loggi, teffi, datai, kx=3, ky=3)
         intdata.append(bvspl_teff(logg_in, teff_in)[0][0])
+    # teffi = teff[:48]
+    # loggi = np.arange(7.0, 9.1, 0.5)
+    # color = [ug, gr]
+    # intdata = []
+    # for data in color:
+    #     datai = np.array([data[:48], data[48:96], data[96:144], data[144:192], data[192:240]])
+    #     bvspl_teff = interp.RectBivariateSpline(loggi, teffi, datai, kx=3, ky=3)
+    #     intdata.append(bvspl_teff(logg_in, teff_in)[0][0])
     return intdata
 
 # tr = np.linspace(1500, 120000, 1000)
 # lgr = np.linspace(7.0, 9.5, 1000)
-# # UG = np.zeros((1000, 1000))
-# # GR = np.zeros((1000, 1000))
-# # RI = np.zeros((1000, 1000))
+# # # UG = np.zeros((1000, 1000))
+# # # GR = np.zeros((1000, 1000))
+# # MS = np.zeros((1000, 1000))
+# # # RI = np.zeros((1000, 1000))
 # # for l in range(len(lgr)):
 # #     print(l)
 # #     for t in range(len(tr)):
-# #         UG[l][t] = colorfit(tr[t], lgr[l])[0]
-# #         GR[l][t] = colorfit(tr[t], lgr[l])[1]
-# #         RI[l][t] = colorfit(tr[t], lgr[l])[2]
-# # np.save("ugsurf", UG)
-# # np.save("grsurf", GR)
-# # np.save("risurf", RI)
-#
-# # UG = np.load("ugsurf.npy")
-# # GR = np.load("grsurf.npy")
-# # RI = np.load("risurf.npy")
-# # surfs = [UG, GR, RI]
-# # nms = ['u-g', 'g-r', 'r-i']
+# #         # UG[l][t] = colorfit(tr[t], lgr[l])[0]
+# #         # GR[l][t] = colorfit(tr[t], lgr[l])[1]
+# #         MS[l][t] = colorfit(tr[t], lgr[l])[2]
+# #         # RI[l][t] = colorfit(tr[t], lgr[l])[2]
+# # # np.save("ugsurf", UG)
+# # # np.save("grsurf", GR)
+# # np.save("masssurf.npy", MS)
+# #
+# # UG = np.load("ugsurf_DB.npy")
+# # GR = np.load("grsurf_DB.npy")
+# MS = np.load("masssurf.npy")
+# # # RI = np.load("risurf.npy")
+# surfs = [MS]
+# # nms = ['u-g', 'g-r']
 # # for s in range(len(surfs)):
-# #     plt.figure()
-# #     plt.title("%s contours in $\log g$-$T_{eff}$ space"%(nms[s]), fontsize=18)
-# #     plt.xlabel("$T_{eff}$", fontsize=14)
-# #     plt.ylabel("$\log g$", fontsize=14)
-# #     plt.clabel(plt.contour(tr, lgr, surfs[s], np.linspace(-1, 2, 100)))
-# #     plt.show()
+# plt.figure()
+# # plt.title("%s contours in $\log g$-$T_{eff}$ space"%(nms[s]), fontsize=18)
+# plt.xlabel("$T_{eff}$", fontsize=14)
+# plt.ylabel("$\log g$", fontsize=14)
+# plt.clabel(plt.contour(tr, lgr, MS, np.linspace(-1, 2, 20)))
+# plt.show()
+# # #
+# trange = np.linspace(3500, 40000, 1000)
+# lgrange = np.arange(7.0, 9.1, 0.5)
+# plt.figure()
+# # # ax = plt.axes(projection='3d')
+# plt.title("K2 white dwarfs and $T_{eff}$, $\log g$ surface in $u-g$, $g-r$ parameter space", fontsize=18)
+# plt.ylabel("$u-g$", fontsize=14)
+# plt.xlabel("$g-r$", fontsize=14)
+# for l in lgrange:
+#     ugr = []
+#     grr = []
+#     # rir = []
+#     for t in trange:
+#         ugr.append(colorfit(t, l)[0])
+#         grr.append(colorfit(t, l)[1])
+#         # rir.append(colorfit(t, l)[2])
+#     plt.plot(grr, ugr, zorder=1)
+#     # , label='$\log g = %s$'%(l)
+# tcoarse = np.arange(3500, 40100, 500)
+# for t in tcoarse:
+#     ugr = []
+#     grr = []
+#     for l in lgrange:
+#         ugr.append(colorfit(t, l)[0])
+#         grr.append(colorfit(t, l)[1])
+#         # rir.append(colorfit(t, l)[2])
+#     if t%5000. == 0:
+#         plt.annotate('$%s K$'%(t), xy=(grr[-1],ugr[-1]), xycoords='data', fontsize=14)
+#     plt.plot(grr, ugr, color='black', zorder=1)
 #
-trange = np.linspace(1500, 120000, 1000)
-lgrange = np.arange(7.0, 9.6, 0.5)
-plt.figure()
-# # ax = plt.axes(projection='3d')
-plt.title("K2 white dwarfs and $T_{eff}$, $\log g$ surface in $u-g$, $g-r$ parameter space", fontsize=18)
-plt.ylabel("$u-g$", fontsize=14)
-plt.xlabel("$g-r$", fontsize=14)
-for l in lgrange:
-    ugr = []
-    grr = []
-    rir = []
-    for t in trange:
-        ugr.append(colorfit(t, l)[0])
-        grr.append(colorfit(t, l)[1])
-        rir.append(colorfit(t, l)[2])
-    plt.plot(grr, ugr, label='$\log g = %s$'%(l), zorder=1)
-tcoarse = np.arange(1500, 120100, 500)
-for t in tcoarse:
-    ugr = []
-    grr = []
-    for l in lgrange:
-        ugr.append(colorfit(t, l)[0])
-        grr.append(colorfit(t, l)[1])
-        rir.append(colorfit(t, l)[2])
-    if t%5000. == 0:
-        plt.annotate('$%s K$'%(t), xy=(grr[-1],ugr[-1]), xycoords='data', fontsize=14)
-    plt.plot(grr, ugr, color='black', zorder=1)
-unug = np.load('unug.npy')
-ungr = np.load('ungr.npy')
-unug_da = np.load('unug.npy')[:842]
-ungr_da = np.load('ungr.npy')[:842]
-unug_db = np.load('unug.npy')[842:925]
-ungr_db = np.load('ungr.npy')[842:925]
-unug_dc = np.load('unug.npy')[925:973]
-ungr_dc = np.load('ungr.npy')[925:973]
-unug_other = np.load('unug.npy')[973:]
-ungr_other = np.load('ungr.npy')[973:]
-spug = np.load('spug.npy')
-spgr = np.load('spgr.npy')
-spug_da = np.load('spug.npy')[:36]
-spgr_da = np.load('spgr.npy')[:36]
-spug_db = np.load('spug.npy')[36:39]
-spgr_db = np.load('spgr.npy')[36:39]
-spug_dc = np.load('spug.npy')[39:41]
-spgr_dc = np.load('spgr.npy')[39:41]
-spug_other = np.load('spug.npy')[41:]
-spgr_other = np.load('spgr.npy')[41:]
-plt.scatter(ungr_da, unug_da, label='Unspotted DA', s=20, alpha=.5, zorder=2)
-plt.scatter(ungr_db, unug_db, label='Unspotted DB', s=20, color='Green', alpha=.5, zorder=2)
-plt.scatter(ungr_dc, unug_dc, label='Unspotted DC', s=20, color='Purple', alpha=.5, zorder=2)
-plt.scatter(ungr_other, unug_other, label='Unspotted DC', s=20, color='Grey', alpha=.5, zorder=2)
-plt.scatter(spgr_da, spug_da, label='Spotted DA', marker='*', s=100, color='Red', edgecolors='Black', zorder=3)
-plt.scatter(spgr_db, spug_db, label='Spotted DB', marker='*', s=100, color='Orange', edgecolors='Black', zorder=3)
-plt.scatter(spgr_dc, spug_dc, label='Spotted DC', marker='*', s=100, color='Yellow', edgecolors='Black', zorder=3)
-plt.scatter(spgr_other, spug_other, label='Spotted Other/Unknown', marker='*', s=100, color='White', edgecolors='Black', zorder=3)
-plt.legend()
-plt.xlim(-0.6, 0.35)
-plt.ylim(-0.6, 1.0)
-plt.gca().invert_yaxis()
-plt.show()
+# # plt.annotate('$log g = 7.0$', xy=(-0.35,0.55), xycoords='data', fontsize=14)
+# unug = np.load('unug.npy')
+# ungr = np.load('ungr.npy')
+# # unug_da = np.load('unug.npy')[:864]
+# # ungr_da = np.load('ungr.npy')[:864]
+# unug_db = np.load('unug.npy')[864:948]
+# ungr_db = np.load('ungr.npy')[864:948]
+# # unug_dc = np.load('unug.npy')[948:1005]
+# # ungr_dc = np.load('ungr.npy')[948:1005]
+# # unug_other = np.load('unug.npy')[1005:]
+# # ungr_other = np.load('ungr.npy')[1005:]
+# spug = np.load('spug.npy')
+# spgr = np.load('spgr.npy')
+# # spug_da = np.load('spug.npy')[:49]
+# # spgr_da = np.load('spgr.npy')[:49]
+# spug_db = np.load('spug.npy')[49:53]
+# spgr_db = np.load('spgr.npy')[49:53]
+# # spug_dc = np.load('spug.npy')[53:55]
+# # spgr_dc = np.load('spgr.npy')[53:55]
+# # spug_other = np.load('spug.npy')[55:]
+# # spgr_other = np.load('spgr.npy')[55:]
+# # plt.scatter(ungr_da, unug_da, label='Unspotted DA', s=20, alpha=.5, zorder=2)
+# plt.scatter(ungr_db, unug_db, label='Unspotted DB', s=20, color='Green', alpha=.5, zorder=2)
+# # plt.scatter(ungr_dc, unug_dc, label='Unspotted DC', s=20, color='Purple', alpha=.5, zorder=2)
+# # plt.scatter(ungr_other, unug_other, label='Unspotted DC', s=20, color='Grey', alpha=.5, zorder=2)
+# # plt.scatter(spgr_da, spug_da, label='Spotted DA', marker='*', s=100, color='Red', edgecolors='Black', zorder=3)
+# plt.scatter(spgr_db, spug_db, label='Spotted DB', marker='*', s=100, color='Orange', edgecolors='Black', zorder=3)
+# # plt.scatter(spgr_dc, spug_dc, label='Spotted DC', marker='*', s=100, color='Yellow', edgecolors='Black', zorder=3)
+# # plt.scatter(spgr_other, spug_other, label='Spotted Other/Unknown', marker='*', s=100, color='White', edgecolors='Black', zorder=3)
+# plt.legend()
+# # plt.xlim(-0.6, 0.3)
+# # plt.ylim(-0.6, 0.8)
+# plt.gca().invert_yaxis()
+# plt.show()
 
-tr = np.linspace(1500, 120000, 1000)
-lgr = np.linspace(7.0, 9.5, 1000)
-UG = np.load("ugsurf.npy")
-GR = np.load("grsurf.npy")
-# RI = np.load("risurf.npy")
-
-# un_temps = []
+# tr = np.linspace(1500, 120000, 1000)
+# lgr = np.linspace(7.0, 9.5, 1000)
+# UG = np.load("ugsurf.npy")
+# GR = np.load("grsurf.npy")
+# # RI = np.load("risurf.npy")
+#
+# un_lg = []
 # # test = 'n'
 # # while test != 'y':
 # #     t1 = input("u-g = ")
 # #     t2 = input("g-r = ")
 # #     # t3 = input("r-i = ")
 # #     inp = [t1, t2]
+# count = 0
+# success = 0
 # for u in range(len(unug)):
+#     if count == 864:
+#         print("***")
+#         print(success)
+#         print("***END OF DA***")
+#         print("***")
+#     elif count == 938:
+#         print("***")
+#         print(success)
+#         print("***END OF DB***")
+#         print("***")
+#     elif count == 1005:
+#         print("***")
+#         print(success)
+#         print("***END OF DC***")
+#         print("***")
 #     inp = [unug[u], ungr[u]]
 #     col = [UG, GR]
 #     try:
 #         for c in range(len(col)):
 #             cont = plt.contour(tr, lgr, col[c], [inp[c]])
 #             if c == 0:
-#                 ugt = [p[0] for p in cont.collections[0].get_paths()[0].vertices]
-#                 uglg = [p[1] for p in cont.collections[0].get_paths()[0].vertices]
-#                 path1 = LineString(cont.collections[0].get_paths()[0].vertices)
+#                 ugt = [p[0] for p in cont.collections[0].get_paths()[1].vertices]
+#                 uglg = [p[1] for p in cont.collections[0].get_paths()[1].vertices]
+#                 path1 = LineString(cont.collections[0].get_paths()[1].vertices)
 #             elif c == 1:
 #                 grt = [p[0] for p in cont.collections[0].get_paths()[0].vertices]
 #                 grlg = [p[1] for p in cont.collections[0].get_paths()[0].vertices]
@@ -198,32 +230,85 @@ GR = np.load("grsurf.npy")
 #             #     rilg = [p[1] for p in cont.collections[0].get_paths()[0].vertices]
 #             #     path3 = LineString(cont.collections[0].get_paths()[0].vertices)
 #         Tfinal, LGfinal = path1.intersection(path2).x, path1.intersection(path2).y
+#         print(Tfinal, LGfinal)
 #         un_temps.append(Tfinal)
+#         un_lg.append(LGfinal)
+#         count += 1
+#         success += 1
 #     except:
 #         print("Outside the range of the Bergeron Models")
+#         count += 1
 #
-# np.save("un_temps", un_temps)
+# print(count)
+# np.save("sp_temps.npy", sp_temps)
+# np.save("sp_lg.npy", sp_lg)
+#
+un_temps = np.load("un_temps.npy").astype(np.float)
+un_lgs = np.load("un_lgs.npy").astype(np.float)
+sp_temps = np.load("sp_temps.npy").astype(np.float)
+sp_lgs = np.load("sp_lgs.npy").astype(np.float)
 
-un_temps = np.load("un_temps.npy")
-sp_temps = np.load("sp_temps.npy")
+un_mass = []
+for u in range(len(un_temps)):
+    un_mass.append(colorfit(un_temps[u], un_lgs[u])[2])
+sp_mass = []
+for u in range(len(sp_temps)):
+    sp_mass.append(colorfit(sp_temps[u], sp_lgs[u])[2])
+np.save('un_mass.npy', un_mass)
+np.save('sp_mass.npy', sp_mass)
 
 fig  = plt.figure()
 ax1 = fig.add_subplot(211)
 ax1.minorticks_on()
-ax1.set_title("K2 white dwarf density by 1000K Temperature Bin")
-ax1.set_ylabel("Density (# of stars)")
-ax1.set_xlabel("Temperature (K)")
-ax1.hist(un_temps, bins=119, label='Unspotted')
+ax1.set_title("K2 white dwarf mass histogram", fontsize=18)
+ax1.set_ylabel("Density (# of stars)", fontsize=14)
+ax1.set_xlabel("Mass ($M_{\odot}$)", fontsize=14)
+ax1.hist(un_mass, bins=np.arange(0, 1.45, 0.05), label='Unspotted')
+ax1.set_xlim(0, 1.4)
+plt.legend()
+ax2 = fig.add_subplot(212)
+ax2.minorticks_on()
+ax2.set_ylabel("Density (# of stars)", fontsize=14)
+ax2.set_xlabel("Mass ($M_{\odot}$)", fontsize=14)
+ax2.hist(sp_mass, bins=np.arange(0, 1.45, 0.05), color='Orange', label='Spotted')
+ax2.set_xlim(0, 1.4)
+plt.legend()
+plt.show()
+
+
+fig  = plt.figure()
+ax1 = fig.add_subplot(211)
+ax1.minorticks_on()
+ax1.set_title("K2 White Dwarf Density by 2000K Temperature Bin", fontsize=18)
+ax1.set_ylabel("Density (# of stars)", fontsize=14)
+ax1.set_xlabel("Temperature (K)", fontsize=14)
+ax1.hist(un_temps, bins=np.arange(0, 122000, 2000), label='Unspotted')
 ax1.set_xlim(0, 120000)
 plt.legend()
 ax2 = fig.add_subplot(212)
 ax2.minorticks_on()
-ax2.set_ylabel("Density (# of stars)")
-ax2.set_xlabel("Temperature (K)")
-ax2.hist(sp_temps, bins=119, color='Orange', label='Spotted')
+ax2.set_ylabel("Density (# of stars)", fontsize=14)
+ax2.set_xlabel("Temperature (K)", fontsize=14)
+ax2.hist(sp_temps, bins=np.arange(0, 122000, 2000), color='Orange', label='Spotted')
 ax2.set_xlim(0, 120000)
 plt.legend()
 plt.show()
+
+# plt.figure()
+# plt.title("K2 White Dwarfs, Photometric $\log g, T_{eff}$ Estimates", fontsize=24)
+# plt.scatter(un_temps[:587], un_lgs[:587], marker='o', color="Blue", zorder=1, alpha=0.5, label="Unspotted, DA")
+# plt.scatter(un_temps[587:606], un_lgs[587:606], marker='o', color="Green", zorder=1, alpha=0.5, label="Unspotted, DB")
+# plt.scatter(un_temps[606:623], un_lgs[606:623], marker='o', color="Purple", zorder=1, alpha=0.5, label="Unspotted, DC")
+# plt.scatter(un_temps[623:], un_lgs[623:], marker='o', color="Grey", zorder=1, alpha=0.5, label="Unspotted, other")
+# plt.scatter(sp_temps[:27], sp_lgs[:27], s=100, marker='*', color="Red", edgecolors='Black', zorder=2, label="Spotted, DA")
+# plt.scatter(sp_temps[27:28], sp_lgs[27:28], s=100, marker='*', color="Orange", edgecolors='Black', zorder=2, label="Spotted, DB")
+# plt.scatter(sp_temps[28:], sp_lgs[28:], s=100, marker='*', color="White", edgecolors='Black', zorder=2, label="Spotted, other")
+# plt.xlabel("$T_{eff} (K)$", fontsize=18)
+# plt.ylabel('$\log g$', fontsize=18)
+# plt.legend(fontsize=14)
+# plt.grid()
+# plt.show()
+
 
     # Tfinal = []
     # LGfinal = []
