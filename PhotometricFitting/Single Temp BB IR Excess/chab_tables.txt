@@ -1,0 +1,189 @@
+#Chabrier 2000 Evolutionary Tables
+#Title:   Evolutionary models for very-low-mass stars and brown dwarfs with
+#         dusty atmospheres
+#Authors: Chabrier G., Baraffe I., Allard F., Hauschildt P.
+#Table:   DUSTY Model Isochrone for 0.1 Gyr
+#================================================================================
+#Byte-by-byte Description of file: datafile1.txt
+#--------------------------------------------------------------------------------
+#   Bytes Format Units   Label     Explanations
+#--------------------------------------------------------------------------------
+#   1-  5  F5.3  solMass Mass      Mass relative to solar at 0.1 Gyrs (1)
+#   8- 13  F6.1  K       Teff      Effective temperature at 0.1 Gyrs
+#  16- 20  F5.2  solLum  Lum       Luminosity relative to solar at 0.1 Gyrs
+#  23- 26  F4.2  [cm/s2] Log(g)    Surface gravity at 0.1 Gyrs
+#  29- 33  F5.3  solRad  Radius    relative to solar at 0.1 Gyrs
+#  38- 42  F5.3  ---     Li        Lithium abundance normalized to the initial 
+#				   mass fraction of 10^-9^ at 0.1 Gyrs
+#  45- 49  F5.2  mag     Vmag      Predicted Johnson-Cousins V band magnitude
+#  52- 56  F5.2  mag     Rmag      Predicted Johnson-Cousins R band magnitude
+#  59- 63  F5.2  mag     Imag      Predicted Johnson-Cousins I band magnitude 
+#  66- 70  F5.2  mag     Jmag      Predicted CIT J band magnitude 
+#  73- 77  F5.2  mag     Kmag      Predicted CIT K band magnitude
+#  80- 84  F5.2  mag     Lmag      Predicted Johnson-Glass L' band magnitude
+#  87- 91  F5.2  mag     Mmag      Predicted Johnson M band magnitude
+#--------------------------------------------------------------------------------
+#Note (1): The Hydrogen burning minimum mass is at 0.070 solMass.
+#--------------------------------------------------------------------------------
+0.010   916.   -4.98  4.21  0.130    1.000  42.64  35.06  31.45  22.06  15.20  11.71  11.30  
+0.012  1333.   -4.25  4.22  0.141    1.000  29.33  24.92  22.13  16.50  12.14  10.10  10.12  
+0.015  1290.   -4.37  4.37  0.132    1.000  30.63  25.96  23.08  17.14  12.52  10.32  10.36  
+0.020  1441.   -4.21  4.53  0.127    1.000  27.30  23.35  20.73  15.68  11.86  10.14  10.20  
+0.030  1878.   -3.75  4.71  0.127    1.000  21.21  18.37  15.96  12.22  10.76   9.74   9.89  
+0.040  2234.   -3.41  4.80  0.132    1.000  18.72  16.41  13.95  11.04  10.16   9.37   9.62  
+0.050  2483.   -3.18  4.84  0.140    0.999  17.07  15.14  12.86  10.47   9.70   9.04   9.28  
+0.055  2576.   -3.09  4.86  0.145    0.992  16.44  14.65  12.48  10.27   9.51   8.90   9.12  
+0.060  2652.   -3.01  4.87  0.149    0.963  15.95  14.26  12.18  10.11   9.36   8.77   8.98  
+0.070  2768.   -2.88  4.88  0.159    0.668  15.19  13.64  11.70   9.83   9.09   8.55   8.72  
+0.072  2787.   -2.86  4.88  0.161    0.538  15.07  13.54  11.63   9.78   9.04   8.51   8.68  
+0.075  2814.   -2.83  4.88  0.164    0.329  14.89  13.40  11.52   9.71   8.97   8.45   8.62  
+0.080  2854.   -2.78  4.89  0.169    0.066  14.65  13.19  11.36   9.61   8.87   8.36   8.52  
+0.090  2920.   -2.69  4.89  0.178    0.000  14.23  12.84  11.09   9.41   8.68   8.20   8.34  
+0.100  2971.   -2.63  4.90  0.185    0.000  13.92  12.58  10.89   9.27   8.54   8.07   8.21  
+#
+#Title:   Evolutionary models for very-low-mass stars and brown dwarfs with
+#         dusty atmospheres
+#Authors: Chabrier G., Baraffe I., Allard F., Hauschildt P.
+#Table:   Same as Table 1 for 0.5 Gyr
+#================================================================================
+#Byte-by-byte Description of file: datafile2.txt
+#--------------------------------------------------------------------------------
+#   Bytes Format Units   Label     Explanations
+#--------------------------------------------------------------------------------
+#   1-  5  F5.3  solMass Mass      Mass relative to solar at 0.5 Gyrs (1)
+#   8- 13  F6.1  K       Teff      Effective temperature at 0.5 Gyrs
+#  16- 20  F5.2  solLum  Lum       Luminosity relative to solar at 0.5 Gyrs
+#  23- 26  F4.2  [cm/s2] Log(g)    Surface gravity at 0.5 Gyrs
+#  29- 33  F5.3  solRad  Radius    relative to solar at 0.5 Gyrs
+#  38- 42  F5.3  ---     Li        Lithium abundance normalized to the initial 
+#				   mass fraction of 10^-9^ at 0.5 Gyrs
+#  45- 49  F5.2  mag     Vmag      Predicted Johnson-Cousins V band magnitude
+#  52- 56  F5.2  mag     Rmag      Predicted Johnson-Cousins R band magnitude
+#  59- 63  F5.2  mag     Imag      Predicted Johnson-Cousins I band magnitude 
+#  66- 70  F5.2  mag     Jmag      Predicted CIT J band magnitude 
+#  73- 77  F5.2  mag     Kmag      Predicted CIT K band magnitude
+#  80- 84  F5.2  mag     Lmag      Predicted Johnson-Glass L' band magnitude
+#  87- 91  F5.2  mag     Mmag      Predicted Johnson M band magnitude
+#--------------------------------------------------------------------------------
+#Note (1): The Hydrogen burning minimum mass is at 0.070 solMass.
+#--------------------------------------------------------------------------------
+0.020   901.   -5.14  4.65  0.111    1.000  43.80  35.89  32.23  22.56  15.59  12.11  11.67  
+0.030  1170.   -4.73  4.86  0.106    1.000  33.93  28.57  25.49  18.78  13.65  11.09  11.10  
+0.040  1461.   -4.36  5.01  0.104    1.000  27.41  23.50  20.90  15.94  12.20  10.51  10.62  
+0.050  1751.   -4.06  5.11  0.103    0.954  22.45  19.47  17.10  13.18  11.35  10.23  10.36  
+0.055  1902.   -3.91  5.15  0.103    0.561  21.42  18.64  16.25  12.60  11.20  10.16  10.32  
+0.060  2048.   -3.78  5.19  0.104    0.007  20.56  17.91  15.46  12.12  11.00  10.04  10.25  
+0.070  2295.   -3.56  5.23  0.106    0.000  18.95  16.62  14.18  11.42  10.58   9.78  10.06  
+0.072  2332.   -3.52  5.24  0.107    0.000  18.71  16.44  14.01  11.34  10.51   9.74  10.02  
+0.075  2400.   -3.46  5.24  0.108    0.000  18.26  16.09  13.71  11.18  10.39   9.65   9.93  
+0.080  2505.   -3.37  5.25  0.111    0.000  17.56  15.56  13.27  10.95  10.18   9.51   9.79  
+0.090  2678.   -3.19  5.24  0.118    0.000  16.40  14.67  12.58  10.57   9.83   9.24   9.48  
+0.100  2809.   -3.05  5.23  0.128    0.000  15.52  13.97  12.06  10.25   9.52   8.99   9.19  
+#
+#Title:   Evolutionary models for very-low-mass stars and brown dwarfs with
+#         dusty atmospheres
+#Authors: Chabrier G., Baraffe I., Allard F., Hauschildt P.
+#Table:   Same as Table 1 for 1 Gyr
+#================================================================================
+#Byte-by-byte Description of file: datafile3.txt
+#--------------------------------------------------------------------------------
+#   Bytes Format Units   Label     Explanations
+#--------------------------------------------------------------------------------
+#   1-  5  F5.3  solMass Mass      Mass relative to solar at 1 Gyr (1)
+#   8- 13  F6.1  K       Teff      Effective temperature at 1 Gyr
+#  16- 20  F5.2  solLum  Lum       Luminosity relative to solar at 1 Gyr
+#  23- 26  F4.2  [cm/s2] Log(g)    Surface gravity at 1 Gyr
+#  29- 33  F5.3  solRad  Radius    relative to solar at 1 Gyr
+#  38- 42  F5.3  ---     Li        Lithium abundance normalized to the initial 
+#				   mass fraction of 10^-9^ at 1 Gyr
+#  45- 49  F5.2  mag     Vmag      Predicted Johnson-Cousins V band magnitude
+#  52- 56  F5.2  mag     Rmag      Predicted Johnson-Cousins R band magnitude
+#  59- 63  F5.2  mag     Imag      Predicted Johnson-Cousins I band magnitude 
+#  66- 70  F5.2  mag     Jmag      Predicted CIT J band magnitude 
+#  73- 77  F5.2  mag     Kmag      Predicted CIT K band magnitude
+#  80- 84  F5.2  mag     Lmag      Predicted Johnson-Glass L' band magnitude
+#  87- 91  F5.2  mag     Mmag      Predicted Johnson M band magnitude
+#--------------------------------------------------------------------------------
+#Note (1): The Hydrogen burning minimum mass is at 0.070 solMass.
+#--------------------------------------------------------------------------------
+0.030   958.   -5.11  4.90  0.102    1.000  40.76  33.66  30.17  21.50  15.22  11.98  11.68  
+0.040  1189.   -4.77  5.06  0.098    1.000  33.53  28.29  25.25  18.69  13.69  11.20  11.24  
+0.050  1424.   -4.48  5.18  0.096    0.932  28.26  24.20  21.54  16.42  12.53  10.74  10.86  
+0.055  1550.   -4.34  5.22  0.095    0.379  26.08  22.48  20.00  15.39  12.08  10.59  10.71  
+0.060  1675.   -4.21  5.27  0.094    0.000  23.95  20.72  18.33  14.14  11.71  10.48  10.59  
+0.070  2012.   -3.88  5.32  0.096    0.000  21.10  18.37  15.95  12.47  11.24  10.24  10.43  
+0.072  2089.   -3.80  5.32  0.097    0.000  20.51  17.87  15.41  12.17  11.10  10.15  10.37  
+0.075  2185.   -3.71  5.33  0.098    0.000  19.82  17.32  14.85  11.85  10.92  10.03  10.29  
+0.080  2358.   -3.54  5.32  0.103    0.000  18.66  16.41  14.00  11.38  10.57   9.80  10.08  
+0.090  2625.   -3.27  5.28  0.113    0.000  16.81  14.99  12.84  10.74   9.99   9.38   9.64  
+0.100  2790.   -3.08  5.25  0.125    0.000  15.68  14.10  12.16  10.33   9.59   9.05   9.26  
+#
+#Title:   Evolutionary models for very-low-mass stars and brown dwarfs with
+#         dusty atmospheres
+#Authors: Chabrier G., Baraffe I., Allard F., Hauschildt P.
+#Table:   Same as Table 1 for 5 Gyr
+#================================================================================
+#Byte-by-byte Description of file: datafile4.txt
+#--------------------------------------------------------------------------------
+#   Bytes Format Units   Label     Explanations
+#--------------------------------------------------------------------------------
+#   1-  5  F5.3  solMass Mass      Mass relative to solar at 5 Gyrs (1)
+#   8- 13  F6.1  K       Teff      Effective temperature at 5 Gyrs
+#  16- 20  F5.2  solLum  Lum       Luminosity relative to solar at 5 Gyrs
+#  23- 26  F4.2  [cm/s2] Log(g)    Surface gravity at 5 Gyrs
+#  29- 33  F5.3  solRad  Radius    relative to solar at 5 Gyrs
+#  38- 42  F5.3  ---     Li        Lithium abundance normalized to the initial 
+#				   mass fraction of 10^-9^ at 5 Gyrs
+#  45- 49  F5.2  mag     Vmag      Predicted Johnson-Cousins V band magnitude
+#  52- 56  F5.2  mag     Rmag      Predicted Johnson-Cousins R band magnitude
+#  59- 63  F5.2  mag     Imag      Predicted Johnson-Cousins I band magnitude 
+#  66- 70  F5.2  mag     Jmag      Predicted CIT J band magnitude 
+#  73- 77  F5.2  mag     Kmag      Predicted CIT K band magnitude
+#  80- 84  F5.2  mag     Lmag      Predicted Johnson-Glass L' band magnitude
+#  87- 91  F5.2  mag     Mmag      Predicted Johnson M band magnitude
+#--------------------------------------------------------------------------------
+#Note (1): The Hydrogen burning minimum mass is at 0.070 solMass.
+#--------------------------------------------------------------------------------
+0.050   907.   -5.35  5.26  0.086    0.921  43.03  35.38  31.77  22.53  15.95  12.57  12.11  
+0.055   990.   -5.21  5.32  0.085    0.284  39.43  32.76  29.36  21.21  15.26  12.23  11.95  
+0.060  1097.   -5.04  5.37  0.084    0.000  35.60  29.92  26.76  19.74  14.50  11.81  11.74  
+0.070  1593.   -4.36  5.40  0.087    0.000  25.54  22.08  19.67  15.23  12.13  10.73  10.84  
+0.072  1754.   -4.18  5.40  0.089    0.000  22.96  19.93  17.58  13.63  11.68  10.54  10.66  
+0.075  1998.   -3.92  5.38  0.092    0.000  21.31  18.55  16.14  12.62  11.35  10.32  10.50  
+0.080  2295.   -3.61  5.34  0.100    0.000  19.12  16.77  14.32  11.57  10.73   9.91  10.20  
+0.090  2621.   -3.28  5.29  0.113    0.000  16.85  15.02  12.86  10.75  10.01   9.39   9.65  
+0.100  2791.   -3.08  5.25  0.124    0.000  15.68  14.10  12.16  10.33   9.59   9.05   9.26  
+#
+#Title:   Evolutionary models for very-low-mass stars and brown dwarfs with
+#         dusty atmospheres
+#Authors: Chabrier G., Baraffe I., Allard F., Hauschildt P.
+#Table:   Same as Table 1 for 10 Gyr
+#================================================================================
+#Byte-by-byte Description of file: datafile5.txt
+#--------------------------------------------------------------------------------
+#   Bytes Format Units   Label     Explanations
+#--------------------------------------------------------------------------------
+#   1-  5  F5.3  solMass Mass      Mass relative to solar at 10 Gyrs (1)
+#   8- 13  F6.1  K       Teff      Effective temperature at 10 Gyrs
+#  16- 20  F5.2  solLum  Lum       Luminosity relative to solar at 10 Gyrs
+#  23- 26  F4.2  [cm/s2] Log(g)    Surface gravity at 10 Gyrs
+#  29- 33  F5.3  solRad  Radius    relative to solar at 10 Gyrs
+#  38- 42  F5.3  ---     Li        Lithium abundance normalized to the initial 
+#				   mass fraction of 10^-9^ at 10 Gyrs
+#  45- 49  F5.2  mag     Vmag      Predicted Johnson-Cousins V band magnitude
+#  52- 56  F5.2  mag     Rmag      Predicted Johnson-Cousins R band magnitude
+#  59- 63  F5.2  mag     Imag      Predicted Johnson-Cousins I band magnitude 
+#  66- 70  F5.2  mag     Jmag      Predicted CIT J band magnitude 
+#  73- 77  F5.2  mag     Kmag      Predicted CIT K band magnitude
+#  80- 84  F5.2  mag     Lmag      Predicted Johnson-Glass L' band magnitude
+#  87- 91  F5.2  mag     Mmag      Predicted Johnson M band magnitude
+#--------------------------------------------------------------------------------
+#Note (1): The Hydrogen burning minimum mass is at 0.070 solMass.
+#--------------------------------------------------------------------------------
+0.060   971.   -5.29  5.40  0.081    0.000  40.34  33.44  30.00  21.61  15.52  12.43  12.09  
+0.070  1552.   -4.42  5.41  0.086    0.000  26.27  22.67  20.19  15.60  12.28  10.79  10.91  
+0.072  1744.   -4.19  5.40  0.089    0.000  23.10  20.05  17.69  13.71  11.70  10.55  10.67  
+0.075  1998.   -3.92  5.38  0.092    0.000  21.31  18.55  16.14  12.62  11.35  10.32  10.50  
+0.080  2297.   -3.61  5.34  0.100    0.000  19.11  16.76  14.31  11.56  10.72   9.91  10.20  
+0.090  2622.   -3.27  5.29  0.113    0.000  16.84  15.01  12.85  10.75  10.01   9.39   9.65  
+0.100  2793.   -3.08  5.25  0.124    0.000  15.66  14.09  12.15  10.33   9.59   9.05   9.26  
