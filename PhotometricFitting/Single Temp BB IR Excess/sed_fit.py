@@ -82,7 +82,7 @@ def sedfit(Teff, logg, EC_mags, EC_err):
     mod_data = bergeron_DA_phot(logg,Teff)
     mod_mags = mod_data[6::]
 
-    age = mod_data[5]/(10**6)
+    age = mod_data[5]/(10**9)
     mass = mod_data[2]
     # print("Mass: ", mass)
 
@@ -139,7 +139,7 @@ def sedfit(Teff, logg, EC_mags, EC_err):
         bbody_scale.append(b_scale)
     bbody_scale = np.mean(bbody_scale)
 
-    return Teff, logg, R_wd, mass, D_wd_wdrad, iso_wav_pts, wd_mod_pts, EC_flux_pts, EC_flux_err_pts, plot_wav, plot_nubb
+    return Teff, logg, R_wd, mass, age, D_wd_wdrad, iso_wav_pts, wd_mod_pts, EC_flux_pts, EC_flux_err_pts, plot_wav, plot_nubb
 
 ####################################################################
 
@@ -159,7 +159,7 @@ with open("/home/jsreding/Documents/UNC/Research/Projects/SpottedWDs/COModel_Thi
 mrr = interp2d(mass_mod, teff_mod, rad_mod, kind='cubic')
 
 lg = np.arange(8.0, 8.25, 0.01)
-T = np.arange(8400., 8551., 1.)
+T = np.arange(8200., 8601., 1.)
 
 bestT = 8478.
 bestlg = 8.13
@@ -168,10 +168,11 @@ plx = 12.9437 #parallax in mas
 D_wd = 1./(plx/1000.)
 distmod = 5.*np.log10(D_wd)-5.
 
-temps = np.zeros(1000)
-logs = np.zeros(1000)
+# temps = np.zeros(1000)
+# logs = np.zeros(1000)
 
-#Raw: 8478p/m12, 8.13p/m0.01, 0.676, chi2=1.480
+#DA
+#Raw: 8478p/m234, 8.13p/m0.06, 0.68p/m0.04, chi2=1.480
 #0.9: 8474, 8.20, 0.728, chi2=1.509
 #1.1: 8475, 8.06, 0.632, chi2=1.450
 
@@ -204,28 +205,35 @@ EC_err =  [0.218,0.024,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.012,0.005,0
 # chisq = 9999999.
 # chi = np.zeros(len(T))
 # bestrad = 0.
-# bar = ChargingBar("Processing...", max=len(T)*len(lg))
+# bestmass = 0.
+# bestmod = np.zeros(5)
+# bar = ChargingBar("Processing...", max=len(lg)*len(T))
 # for i in range(len(T)):
 #     Teff_in = np.round(T[i], 0)
-#     # logg_in = 8.13
+#     # logg_in = np.round(lg[i], 2)
 #     for i in range(len(lg)):
 #         logg_in = np.round(lg[i], 2)
 
-obj_Teff, obj_logg, obj_rad, obj_mass, obj_dist, wavpts, bestmod, obj_flux, obj_err, pltwav, bbody_nu = sedfit(bestT, bestlg, EC_mags, EC_err)
+obj_Teff, obj_logg, obj_rad, obj_mass, obj_age, obj_dist, wavpts, obj_mod, obj_flux, obj_err, pltwav, bbody_nu = sedfit(bestT, bestlg, EC_mags, EC_err)
 
-        # chi2test = chisqr(obj_flux, bestmod, obj_err)
-        # chi[i] = chi2test
+        # chi2test = chisqr(obj_flux, obj_mod, obj_err)
+        # # chi[i] = chi2test
         # bar.next()
         # if abs(chi2test-1.) < abs(chisq-1.):
         #     chisq = chi2test
-        #     bestT = obj_Teff
-        #     bestlg = obj_logg
-        #     bestrad = obj_rad
+bestT = obj_Teff
+bestlg = obj_logg
+bestrad = obj_rad
+bestmass = obj_mass
+bestmod = obj_mod
+bestage = obj_age
+        #     print()
+        #     print(bestT, bestlg, bestmass, chisq)
 
     # temps[e] = bestT
     # logs[e] = bestlg
 # print()
-# print(bestT, bestlg, bestrad, chisq, time.time()-starttime)
+# print(bestT, bestlg, bestrad, bestmass, bestage, chisq, time.time()-starttime)
 # print("##COMPLETED##")
 # print(np.mean(temps),"+/-", np.std(temps),";", np.mean(logs),"+/-", np.std(logs))
 # bar.finish()

@@ -58,22 +58,25 @@ with open(sys.argv[1], 'r') as f:
     for row in reader:
         teff.append(float(row['Teff']))
         M.append(float(row['M/Mo']))
-        mbol.append(float(row['Mbol']))
-        bc.append(float(row['BC']))
+        # mbol.append(float(row['Mbol']))
+        # bc.append(float(row['BC']))
         #Corrections from Holberg and Bergeron 2006
-        u.append(float(row['u'])+0.0424)
-        g.append(float(row['g'])-0.0023)
-        r.append(float(row['r'])-0.0032)
-        i.append(float(row['i'])-0.0160)
-        z.append(float(row['z'])-0.0276)
-        U.append(float(row['U'])+0.0915)
-        jonB.append(float(row['B'])+0.0069)
-        V.append(float(row['V'])+0.0000)
-        jonR.append(float(row['R'])+0.0018)
-        I.append(float(row['I'])-0.0014)
-        J.append(float(row['J'])-0.0140)
-        H.append(float(row['H'])+0.0060)
-        K.append(float(row['K'])+0.0080)
+        # u.append(float(row['u'])+0.0424)
+        # g.append(float(row['g'])-0.0023)
+        # r.append(float(row['r'])-0.0032)
+        # i.append(float(row['i'])-0.0160)
+        # z.append(float(row['z'])-0.0276)
+        # U.append(float(row['U'])+0.0915)
+        # jonB.append(float(row['B'])+0.0069)
+        # V.append(float(row['V'])+0.0000)
+        # jonR.append(float(row['R'])+0.0018)
+        # I.append(float(row['I'])-0.0014)
+        # J.append(float(row['J'])-0.0140)
+        # H.append(float(row['H'])+0.0060)
+        # K.append(float(row['K'])+0.0080)
+        Gaia.append(float(row['MG']))
+        Gbp.append(float(row['MGbp']))
+        Grp.append(float(row['MGrp']))
         age.append(float(row['Age']))
 # ug = np.asarray(u)-np.asarray(g)
 # gr = np.asarray(g)-np.asarray(r)
@@ -88,7 +91,7 @@ with open(sys.argv[1], 'r') as f:
 # HK = np.asarray(H)-np.asarray(K)
 
 def colorfit(teff_in, logg_in):
-    teffi = teff[:58]
+    teffi = teff[:60]
     loggi = np.arange(7.0, 9.6, 0.5)
     color = [M]
     intdata = []
